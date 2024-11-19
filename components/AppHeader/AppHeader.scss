@@ -1,0 +1,38 @@
+.header-app{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .header-container{
+    display: flex;
+    padding: 20px 48px 20px 48px;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1040px;
+    
+    .header-logo{
+      color: $secondary;
+      font-size: 24px;
+      text-transform: uppercase;
+    }
+    .header-menu{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      .vertical-divider-primary{
+        max-height: 20px;
+      }
+      .header-market{
+        display: flex;
+        gap: 5px;
+      }
+      .header-cart-button{
+        background: none;
+        cursor: pointer;
+      }
+    }
+  }
+
+}
