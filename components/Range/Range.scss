@@ -1,0 +1,57 @@
+.range-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  
+  input[type="range"] {
+    width: 100%;
+    appearance: none;
+    height: 8px;
+    border-radius: 5px;
+    outline: none;
+    background: #ccc; /* Cor da trilha */
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  /* Estilo para o botão deslizante (thumb) */
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $secondary; /* Cor do botão */
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+  }
+  
+  /* Cor do botão deslizante ao passar o mouse */
+  input[type="range"]:hover::-webkit-slider-thumb {
+    background: $secondary; /* Cor ao hover */
+    transform: scale(1.2);
+  }
+  
+  /* Trilhas diferentes para navegadores baseados no Firefox */
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $secondary; /* Cor do botão */
+    cursor: pointer;
+  }
+  
+  input[type="range"]::-moz-range-track {
+    background: #ccc; /* Cor da trilha */
+  }
+  
+  /* Cor do progresso (parte antes do thumb) */
+  input[type="range"] {
+    background: linear-gradient(
+      to right,
+      $secondary var(--progress-percentage),
+      #ccc var(--progress-percentage)
+    );
+  }
+}

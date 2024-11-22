@@ -26,7 +26,7 @@ const addToCart = (item) => {
 
 <template>
   <div class="details-shopping-cards-container" >
-    <img :src="item.imagePath" alt="imagem item" />
+    <img src="../../assets/images/macbook.jpg" alt="imagem item" />
     <div class="description-card">
       <span>
         {{ item.price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}

@@ -8,12 +8,12 @@ const cartStore = useCartStore();
 const items = computed(() => cartStore.getItems)
 const total = computed(() => cartStore.getTotal)
 
-  const removeToCart = (item) => {
-    cartStore.removeItem(item);
-  };
+const removeToCart = (item) => {
+  cartStore.removeItem(item);
+};
 
 
-  import { useToast } from '~/composables/useToast';
+import { useToast } from '~/composables/useToast';
 
 const { addToast } = useToast();
 
@@ -22,29 +22,33 @@ const { addToast } = useToast();
 
 const finalizePurchase = async () => {
   try {
-    const clonedItems = cartStore.getItems.map(({ id, ...rest }) => rest)
-    const response = await fetch('http://localhost:3333/cart', {
+
+    const data = {
+      addressId: "1",
+      total: total.value,
+      products: items.value
+    }
+
+    const response = await fetch('http://localhost:3333/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(clonedItems),
+      body: JSON.stringify(data)
     });
 
     if (!response.ok) {
+      addToast('Ocorreu um erro !', 'error');
       throw new Error('Erro ao finalizar a compra');
-      addToast('Ocorreu um erro!', 'error');
     }
 
-    const data = await response.json();
-    addToast('Compra finalizada com sucesso:', 'success');
-    
+    addToast("compra finalizada com sucesso", 'success');
+
   } catch (error) {
     console.error(error.message);
-    addToast('Ocorreu um erro!', 'error');
+    addToast('Ocorreu um erro !', 'error');
   }
 };
-  
 
 </script>
 
@@ -69,7 +73,7 @@ const finalizePurchase = async () => {
         {{ total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }}
       </span>
     </div>
-    <button @click="finalizePurchase()">
+    <button  :disabled="total === 0" @click="finalizePurchase()">
       Finalizar Compra
     </button>
   </div>

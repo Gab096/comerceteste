@@ -17,13 +17,19 @@ const cartItemsCount = computed(() => cartStore.itemCount)
  const closeModal = () => {
   isModalOpen.value = false;
 };
+
+const router = useRouter()
+const goTo = (path) => {
+  router.push({ path: path })
+};
+
 </script>
 
 
 <template>
   <header class="header-app" >
     <div class="header-container">
-      <div class="header-logo">
+      <div class="header-logo" @click="goTo('/')">
         techno
       </div>
       <div class="header-menu">

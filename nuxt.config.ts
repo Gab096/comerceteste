@@ -2,7 +2,8 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  css: ['/assets/scss/main.scss'],
+  css: ['/assets/scss/main.scss' ],
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -12,6 +13,7 @@ export default defineNuxtConfig({
       }
     }
   },
+
   app:{
     head: {
       link: [
@@ -22,4 +24,12 @@ export default defineNuxtConfig({
       ]
     }
   },
+
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://localhost:3333', 
+    },
+  },
+
+  modules: ['nuxt-swiper'],
 })

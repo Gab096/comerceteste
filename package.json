@@ -16,6 +16,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@vueuse/core": "^11.2.0",
     "nuxt": "^3.14.159",
+    "nuxt-swiper": "^2.0.0",
     "pinia": "^2.2.6",
     "vue": "^3.5.13",
     "vue-router": "latest"

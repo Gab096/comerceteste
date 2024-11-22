@@ -3,13 +3,11 @@
 </style>
 
 <script setup>
-import {
-  itemProps,
-  Modal,
-} from './ShoppingCards.ts';
-import DetailsShoppingCards from '../DetailsShopingCards/DetailsShoppingCards.vue';
 defineProps({
-  item: itemProps,
+  item: {
+  type: Object,
+  required: true,
+},
   activeModalId: {
     type: Number,
     required: true,
@@ -18,7 +16,6 @@ defineProps({
 });
 const emit = defineEmits(['open-modal', 'close-modal'])
 const openModal = (id) => emit('open-modal', id)
-const closeModal = () => emit('close-modal')
 
 </script>
 
@@ -34,11 +31,4 @@ const closeModal = () => emit('close-modal')
       </p>
     </div>
   </div>
-  <Modal 
-  v-if="activeModalId === item.id"
-  :show="true" 
-  title=""
-  @close="closeModal">
-    <DetailsShoppingCards :item="item" />
-  </Modal>
 </template>
