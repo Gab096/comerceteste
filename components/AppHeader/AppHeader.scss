@@ -33,7 +33,7 @@
       }
       .header-market{
         display: flex;
-        gap: 5px;
+        gap: 25px;
         .count{
           color: $white;
         }
@@ -44,6 +44,14 @@
         svg,path{
           fill: $secondary;
         }
+      }
+    }
+    .header-login-button{
+      background: none;
+      cursor: pointer;
+      svg,path{
+        fill: $secondary;
+        font-size: 25px;
       }
     }
   }

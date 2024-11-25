@@ -13,11 +13,13 @@ defineProps({
 
 import { useCartStore } from '~/stores/cart';
 import { useToast } from '~/composables/useToast';
+import { useSession } from '~/stores/session';
 
 const { addToast } = useToast();
 
 const cartStore = useCartStore();
-
+const session = useSession();
+const isAuthenticated = computed(() => session.isAuthenticated)
 const addToCart = (item) => {
   cartStore.addItem(item);
   addToast('adicionado ao carrinho!', 'success');
@@ -37,7 +39,7 @@ const addToCart = (item) => {
       <p>
         {{ item.description }}
       </p>
-      <button @click="addToCart(item)">
+      <button :disabled="isAuthenticated === false" @click="addToCart(item)">
         Adicionar item
       </button>
     </div>

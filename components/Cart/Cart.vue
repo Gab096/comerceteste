@@ -4,7 +4,9 @@
 
 <script setup>
 import { useCartStore } from '~/stores/cart';
+import { useSession } from '~/stores/session';
 const cartStore = useCartStore();
+const session = useSession();
 const items = computed(() => cartStore.getItems)
 const total = computed(() => cartStore.getTotal)
 
@@ -19,12 +21,9 @@ const { addToast } = useToast();
 
 
 
-
 const finalizePurchase = async () => {
   try {
-
     const data = {
-      addressId: "1",
       total: total.value,
       products: items.value
     }
@@ -33,6 +32,7 @@ const finalizePurchase = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.dataToken.value}`,
       },
       body: JSON.stringify(data)
     });
