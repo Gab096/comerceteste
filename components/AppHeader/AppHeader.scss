@@ -10,6 +10,11 @@
   top: 0;
   z-index: 2000;
 
+  .auth-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .header-container{
     display: flex;
     padding: 20px 48px 20px 48px;
@@ -33,9 +38,14 @@
       }
       .header-market{
         display: flex;
+        align-items: center;
         gap: 25px;
         .count{
           color: $white;
+        }
+        .header-count-container{
+          display: flex;
+          align-items: center;
         }
       }
       .header-cart-button{

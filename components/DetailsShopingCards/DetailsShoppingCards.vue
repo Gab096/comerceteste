@@ -1,5 +1,5 @@
 <style>
-  @import url("./DetailsShoppingCards.scss");
+@import url("./DetailsShoppingCards.scss");
 </style>
 
 <script setup>
@@ -14,24 +14,33 @@ defineProps({
 import { useCartStore } from '~/stores/cart';
 import { useToast } from '~/composables/useToast';
 import { useSession } from '~/stores/session';
+import { useLoginModal } from '~/stores/loginModal';
 
 const { addToast } = useToast();
 
 const cartStore = useCartStore();
 const session = useSession();
+const loginModal = useLoginModal();
 const isAuthenticated = computed(() => session.isAuthenticated)
 const addToCart = (item) => {
-  cartStore.addItem(item);
-  addToast('adicionado ao carrinho!', 'success');
+  if(isAuthenticated.value){
+    cartStore.addItem(item);
+    addToast('adicionado ao carrinho!', 'success');
+  }else{
+    loginModal.open()
+  }
 };
 </script>
 
 <template>
-  <div class="details-shopping-cards-container" >
+  <div class="details-shopping-cards-container">
     <img src="../../assets/images/macbook.jpg" alt="imagem item" />
     <div class="description-card">
       <span>
-        {{ item.price.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}}
+        {{ item.price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }}
+      </span>
+      <span>
+        {{ item.category }}
       </span>
       <h6>
         {{ item.name }}
@@ -39,7 +48,7 @@ const addToCart = (item) => {
       <p>
         {{ item.description }}
       </p>
-      <button :disabled="isAuthenticated === false" @click="addToCart(item)">
+      <button @click="addToCart(item)">
         Adicionar item
       </button>
     </div>

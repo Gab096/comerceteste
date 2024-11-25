@@ -6,14 +6,16 @@
 import Cart from '../Cart/Cart.vue';
 import { useCartStore } from '~/stores/cart';
 import { useSession } from '~/stores/session';
+import { useLoginModal } from '~/stores/loginModal';
 import Login from '../Login/Login.vue';
 const cartStore = useCartStore();
 const sessionStore = useSession();
+const loginModal = useLoginModal();
 const cartItemsCount = computed(() => cartStore.itemCount)
 const isAuthenticated = computed(() => sessionStore.isAuthenticated)
+const isLoginModalOpen = computed(() => loginModal.isOpen)
 
 const isModalOpen = ref(false);
-const isLoginModalOpen = ref(false);
 
 const openCartModal = () => {
   isModalOpen.value = true;
@@ -23,14 +25,15 @@ const closeCartModal = () => {
   isModalOpen.value = false;
 };
 const openLoginModal = () => {
-  isLoginModalOpen.value = true;
+  loginModal.open()
 };
 
 const closeLoginModal = () => {
-  isLoginModalOpen.value = false;
+  loginModal.close()
 };
 const closeSession = () => {
   sessionStore.logout()
+  isModalOpen.value = false;
 };
 
 const router = useRouter()
@@ -47,14 +50,14 @@ const goTo = (path) => {
       <div class="header-logo" @click="goTo('/')">
         techno
       </div>
-      <div v-if="isAuthenticated">
+      <div v-if="isAuthenticated" class="auth-div">
         <div class="header-menu">
           <div class="header-balance">
             R$ 10.000,00
           </div>
         <div class="vertical-divider-primary" />
         <div class="header-market">
-          <div>
+          <div class="header-count-container">
             <span class="count">
               {{ cartItemsCount }}
             </span>

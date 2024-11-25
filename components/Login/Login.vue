@@ -30,7 +30,7 @@ const handleSubmit = async () => {
     }
 
     sessionStore.authenticate(data.value as IDataToken)
-    console.log('Login bem-sucedido:', data.value);
+    addToast('Login bem-sucedido', 'success');
   } catch (err) {
     console.error('Erro ao fazer login:', err);
     addToast('Erro inesperado. Tente novamente.', 'error');

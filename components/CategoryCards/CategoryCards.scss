@@ -31,9 +31,9 @@
     min-width: 200px;
     border-right: 1px solid $primary;
   }
-
+  
   &:hover{
-  transform: scale(1.03);    
+    transform: scale(1.03);    
   }
 
   @media (max-width:762px) {
@@ -43,6 +43,8 @@
     flex-direction: column;
     img{
       max-height: 100px;
+      border-right: unset;
+      border-bottom: 1px solid $primary;
     }
   }
   
